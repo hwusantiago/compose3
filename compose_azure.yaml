@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+       web-app:
+             image: schumbe/f29ds-scraper:compose3-web-app
+             container_name: scraper-mysql
+             ports:
+                   - "5000:5000"         
+       mysqldb:
+             image: mysql
+             ports:
+                   - 3306:3306
+             environment:
+                   - MYSQL_ROOT_PASSWORD=p@ssw0rd1
+             volumes:
+                   - mysql:/var/lib/mysql
+                   - mysql-config:/etc/mysql
+volumes:
+       mysql:
+            driver: azure_file
+            driver_opts:
+                  share_name: myfileshare
+                  storage_account_name: f29dsmysql
+       mysql-config:
+            driver: azure_file
+            driver_opts:
+                  share_name: myfileshareconfig
+                  storage_account_name: f29dsmysqlconfig

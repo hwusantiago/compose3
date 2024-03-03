@@ -65,12 +65,9 @@ def db_init():
     cursor.execute("SELECT * FROM Courses")
     result = "<h3>Courses</h3>"
     for row in cursor.fetchall():
-        #print(row)
         result += row[0]+" - "+row[1]+"<br>"
     
     cursor.close()
-
-    #return 'init database'
     return result
 
 if __name__ == "__main__":
